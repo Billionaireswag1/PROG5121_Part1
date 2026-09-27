@@ -35,9 +35,15 @@ public class PROG5121_Part1 {
         login.setCellPhoneNumber(scanner.nextLine());
 
         String registrationMessage = login.registerUser();
-        System.out.println(registrationMessage);
 
-        if (registrationMessage.equals("Registration successful.")) {
+        if (login.checkUserName()
+                && login.checkPasswordComplexity()
+                && login.checkCellPhoneNumber()) {
+
+            System.out.println("Username successfully captured.");
+            System.out.println("Password successfully captured.");
+            System.out.println("Cell phone number successfully added.");
+            System.out.println(registrationMessage);
 
             System.out.println();
             System.out.println("=== Login ===");
@@ -49,6 +55,9 @@ public class PROG5121_Part1 {
             login.setPassword(scanner.nextLine());
 
             System.out.println(login.returnLoginStatus());
+
+        } else {
+            System.out.println(registrationMessage);
         }
 
         scanner.close();

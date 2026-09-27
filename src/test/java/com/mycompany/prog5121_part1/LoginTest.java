@@ -52,4 +52,76 @@ public class LoginTest {
 
         assertFalse(login.checkCellPhoneNumber());
     }
+
+    @Test
+    void testLoginUserSuccessfully() {
+        Login login = new Login();
+
+        login.setFirstName("Dineo");
+        login.setLastName("Lesabe");
+        login.setUsername("kyl_1");
+        login.setPassword("Ch&sec@ke99!");
+        login.setCellPhoneNumber("+27838968976");
+
+        login.registerUser();
+
+        assertTrue(login.loginUser());
+    }
+
+    @Test
+    void testLoginUserUnsuccessfully() {
+        Login login = new Login();
+
+        login.setFirstName("Dineo");
+        login.setLastName("Lesabe");
+        login.setUsername("kyl_1");
+        login.setPassword("Ch&sec@ke99!");
+        login.setCellPhoneNumber("+27838968976");
+
+        login.registerUser();
+
+        login.setUsername("wrong");
+        login.setPassword("wrong");
+
+        assertFalse(login.loginUser());
+    }
+
+    @Test
+    void testSuccessfulLoginStatus() {
+        Login login = new Login();
+
+        login.setFirstName("Dineo");
+        login.setLastName("Lesabe");
+        login.setUsername("kyl_1");
+        login.setPassword("Ch&sec@ke99!");
+        login.setCellPhoneNumber("+27838968976");
+
+        login.registerUser();
+
+        assertEquals(
+                "Welcome Dineo, Lesabe it is great to see you again.",
+                login.returnLoginStatus()
+        );
+    }
+
+    @Test
+    void testUnsuccessfulLoginStatus() {
+        Login login = new Login();
+
+        login.setFirstName("Dineo");
+        login.setLastName("Lesabe");
+        login.setUsername("kyl_1");
+        login.setPassword("Ch&sec@ke99!");
+        login.setCellPhoneNumber("+27838968976");
+
+        login.registerUser();
+
+        login.setUsername("wrong");
+        login.setPassword("wrong");
+
+        assertEquals(
+                "Username or password incorrect, please try again.",
+                login.returnLoginStatus()
+        );
+    }
 }

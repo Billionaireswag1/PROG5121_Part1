@@ -1,7 +1,6 @@
-
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java
  */
 package com.mycompany.prog5121_part1;
 
@@ -14,6 +13,10 @@ public class Login {
     private String username;
     private String password;
     private String cellPhoneNumber;
+    private String firstName;
+    private String lastName;
+    private String registeredUsername;
+    private String registeredPassword;
 
     public boolean checkUserName() {
         return username.contains("_") && username.length() <= 5;
@@ -31,6 +34,14 @@ public class Login {
         this.cellPhoneNumber = cellPhoneNumber;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public boolean checkPasswordComplexity() {
         boolean hasCapital = false;
         boolean hasNumber = false;
@@ -46,12 +57,14 @@ public class Login {
             }
         }
 
-        return password.length() >= 8 && hasCapital && hasNumber && hasSpecial;
+        return password.length() >= 8
+                && hasCapital
+                && hasNumber
+                && hasSpecial;
     }
 
-    // South African telephone numbering information based on ICASA's
-    // National Numbering Plan Regulations.
-    // Source: Independent Communications Authority of South Africa (ICASA).
+    // Regular expression used to validate a South African cell phone number.
+    // Source: [1].
     public boolean checkCellPhoneNumber() {
         return cellPhoneNumber != null
                 && cellPhoneNumber.matches("^\\+27[0-9]{9}$");
@@ -70,6 +83,23 @@ public class Login {
             return "Cell phone number incorrectly formatted or does not contain international code.";
         }
 
+        registeredUsername = username;
+        registeredPassword = password;
+
         return "Registration successful.";
+    }
+
+    public boolean loginUser() {
+        return username.equals(registeredUsername)
+                && password.equals(registeredPassword);
+    }
+
+    public String returnLoginStatus() {
+        if (loginUser()) {
+            return "Welcome " + firstName + ", " + lastName
+                    + " it is great to see you again.";
+        } else {
+            return "Username or password incorrect, please try again.";
+        }
     }
 }

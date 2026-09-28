@@ -64,7 +64,7 @@ public class Login {
     }
 
     // Regular expression used to validate a South African cell phone number.
-    // Source: // Source: ICASA (2016).
+    // Source:  Source: ICASA (2016).
     public boolean checkCellPhoneNumber() {
         return cellPhoneNumber != null
                 && cellPhoneNumber.matches("^\\+27[0-9]{9}$");

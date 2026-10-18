@@ -17,7 +17,4 @@ and then log in using their registered username and password.
 
 ## References
 
-[1] Independent Communications Authority of South Africa (ICASA),
-“Numbering Plan Regulations - 2016,” 2016. [Online].
-Available: https://www.icasa.org.za/legislation-and-regulations/numbering-plan-regulations
-[Accessed: 27 Sep. 2026].
+Independent Communications Authority of South Africa (ICASA). 2016. Numbering Plan Regulations - 2016. Available at: https://www.icasa.org.za/legislation-and-regulations/numbering-plan-regulations (Accessed: 27 September 2026).

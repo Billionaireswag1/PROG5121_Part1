@@ -19,7 +19,9 @@ public class Login {
     private String registeredPassword;
 
     public boolean checkUserName() {
-        return username.contains("_") && username.length() <= 5;
+        return username != null
+                && username.contains("_")
+                && username.length() <= 5;
     }
 
     public void setUsername(String username) {
@@ -43,6 +45,10 @@ public class Login {
     }
 
     public boolean checkPasswordComplexity() {
+        if (password == null) {
+            return false;
+        }
+
         boolean hasCapital = false;
         boolean hasNumber = false;
         boolean hasSpecial = false;
@@ -90,7 +96,11 @@ public class Login {
     }
 
     public boolean loginUser() {
-        return username.equals(registeredUsername)
+        return registeredUsername != null
+                && registeredPassword != null
+                && username != null
+                && password != null
+                && username.equals(registeredUsername)
                 && password.equals(registeredPassword);
     }
 

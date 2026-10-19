@@ -27,6 +27,15 @@ public class Message {
         this.message = message;
     }
 
+    public Message(String messageID, int messageNumber,
+               String recipient, String message) {
+    this.messageID = messageID;
+    this.messageNumber = messageNumber;
+    this.recipient = recipient;
+    this.message = message;
+    this.messageStatus = "Pending";
+}
+    
     public String generateMessageID() {
         long id = ThreadLocalRandom.current().nextLong(
                 1_000_000_000L, 10_000_000_000L);
@@ -37,9 +46,13 @@ public class Message {
         return messageID != null && messageID.matches("\\d{10}");
     }
 
-    public boolean checkRecipientCell() {
-        return recipient != null && recipient.matches("\\+27\\d{9}");
+    public String checkRecipientCell() {
+    if (recipient != null && recipient.matches("\\+27\\d{9}")) {
+        return "Cell phone number successfully captured.";
     }
+
+    return "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.";
+}
 
     public boolean checkMessageLength() {
         return message != null && message.length() <= 250;
@@ -107,6 +120,10 @@ public class Message {
         }
     }
 
+    public String storeMessage() {
+    return storeMessageToJson();
+}
+    
     private String escapeJson(String value) {
         if (value == null) {
             return "";

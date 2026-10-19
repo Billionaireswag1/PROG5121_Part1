@@ -5,6 +5,7 @@
 package com.mycompany.prog5121_part1;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,7 +13,7 @@ import java.util.Scanner;
  */
 public class PROG5121_Part1 {
     private static int messageCount = 0;
-
+     private static ArrayList<Message> sentMessages = new ArrayList<>();
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -56,7 +57,9 @@ public class PROG5121_Part1 {
             login.setPassword(scanner.nextLine());
 
                         System.out.println(login.returnLoginStatus());
-
+           
+            int choice;
+            do {
             System.out.println();
             System.out.println("=== Messaging Menu ===");
             System.out.println("1. Send Messages");
@@ -64,7 +67,7 @@ public class PROG5121_Part1 {
             System.out.println("3. Quit");
 
             System.out.print("Choose an option: ");
-            int choice = scanner.nextInt();
+            choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
     case 1:
@@ -72,9 +75,15 @@ public class PROG5121_Part1 {
         break;
 
     case 2:
-        System.out.println("Coming Soon.");
-        break;
-
+    if (sentMessages.isEmpty()) {
+        System.out.println("No sent messages yet.");
+    } else {
+        for (Message sentMessage : sentMessages) {
+            System.out.println("Message: "
+                    + sentMessage.getMessage());
+        }
+    }
+    break;
     case 3:
         System.out.println("Exiting Messaging Menu.");
         break;
@@ -83,6 +92,7 @@ public class PROG5121_Part1 {
         System.out.println("Invalid option. Please choose 1, 2 or 3.");
         break;
 }
+         } while (choice != 3);
         } else {
             System.out.println(registrationMessage);
         }
@@ -167,14 +177,12 @@ public class PROG5121_Part1 {
 
             switch (action) {
                 case "1":
-                    currentMessage.setMessageStatus("Sent");
-                    System.out.println("Message successfully sent.");
-                    break;
+    currentMessage.setMessageStatus("Sent");
+    sentMessages.add(currentMessage);
+    System.out.println("Message successfully sent.");
+    break;
 
-                case "2":
-                    currentMessage.setMessageStatus("Disregarded");
-                    System.out.println("Press 0 to delete the message.");
-                    break;
+              
 
                 case "3":
                     System.out.println(currentMessage.storeMessageToJson());

@@ -11,6 +11,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 public class MessageTest {
 
@@ -227,4 +230,61 @@ public class MessageTest {
 
         return output.toString();
     }
+    
+    @Test
+public void testMessageLengthSuccessFeedback() {
+    Message message = new Message();
+    message.setMessage("Hello Dineo");
+
+    assertEquals(
+            "Message ready to send.",
+            message.getMessageLengthFeedback());
+}
+
+@Test
+public void testMessageLengthFailureFeedback() {
+    Message message = new Message();
+    message.setMessage("A".repeat(255));
+
+    assertEquals(
+            "Message exceeds 250 characters by 5; please reduce the size.",
+            message.getMessageLengthFeedback());
+}
+
+
+@Test
+
+public void testFindLongestMessage() {
+    String result = PROG5121_Part1.findLongestMessage();
+
+    assertTrue(result != null);
+    assertFalse(result.isEmpty());
+}
+
+@Test
+public void testSearchMessageByID() {
+    String result = PROG5121_Part1.searchMessageByID("4474007213");
+
+    assertTrue(result.contains("Hi thuli"));
+    assertTrue(result.contains("Stored"));
+}
+
+@Test
+public void testSearchMessagesByRecipient() {
+    String result = PROG5121_Part1.searchMessagesByRecipient(
+            "+27796765643");
+
+    assertTrue(result.contains("hi mom"));
+    assertTrue(result.contains("Stored"));
+}
+
+@Test
+public void testGenerateMessageReport() {
+    String result = PROG5121_Part1.generateMessageReport();
+
+    assertTrue(result.contains("Hi thuli"));
+    assertTrue(result.contains("hi mom"));
+    assertTrue(result.contains("Stored"));
+}
+
 }

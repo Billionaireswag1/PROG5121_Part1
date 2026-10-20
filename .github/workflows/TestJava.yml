@@ -1,0 +1,27 @@
+name: TestJava
+
+on:
+  push:
+    branches:
+      - part2-messaging
+  pull_request:
+    branches:
+      - part2-messaging
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '26'
+          cache: maven
+
+      - name: Run unit tests
+        run: mvn --batch-mode clean test

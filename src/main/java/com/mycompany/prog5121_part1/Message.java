@@ -1,12 +1,17 @@
-
 package com.mycompany.prog5121_part1;
 
-import java.util.concurrent.ThreadLocalRandom;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Represents a QuickChat message and provides message validation,
+ * hash generation and JSON storage functionality.
+ *
+ * @author Dineo Lesabe
+ */
 public class Message {
 
     private String messageID;
@@ -59,6 +64,21 @@ public class Message {
         return message != null && message.length() <= 250;
     }
 
+    public String getMessageLengthFeedback() {
+        if (message == null) {
+            return "Please enter a message.";
+        }
+
+        if (message.length() <= 250) {
+            return "Message ready to send.";
+        }
+
+        int excessCharacters = message.length() - 250;
+
+        return "Message exceeds 250 characters by " + excessCharacters
+                + "; please reduce the size.";
+    }
+
     public String createMessageHash() {
         if (messageID == null || messageID.length() < 2
                 || message == null || message.trim().isEmpty()) {
@@ -78,6 +98,12 @@ public class Message {
         return messageHash;
     }
 
+        /**
+     * Stores messages in JSON format in the messages.json file.
+     * Uses Java file-handling functionality.
+     * Reference: Oracle (2026).
+     */
+    
     public String storeMessageToJson() {
         Path path = Path.of("messages.json");
 
@@ -130,37 +156,11 @@ public class Message {
             return "";
         }
 
-        StringBuilder escaped = new StringBuilder();
-
-        for (char character : value.toCharArray()) {
-            switch (character) {
-                case '\\':
-                    escaped.append("\\\\");
-                    break;
-                case '"':
-                    escaped.append("\\\"");
-                    break;
-                case '\n':
-                    escaped.append("\\n");
-                    break;
-                case '\r':
-                    escaped.append("\\r");
-                    break;
-                case '\t':
-                    escaped.append("\\t");
-                    break;
-                default:
-                    if (character < 0x20) {
-                        escaped.append(String.format("\\u%04x",
-                                (int) character));
-                    } else {
-                        escaped.append(character);
-                    }
-                    break;
-            }
-        }
-
-        return escaped.toString();
+        return value.replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\r", "\\r")
+                .replace("\t", "\\t");
     }
 
     public String getMessageID() {

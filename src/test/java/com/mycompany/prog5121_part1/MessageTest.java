@@ -160,8 +160,8 @@ public class MessageTest {
         String output = runSentMessage(
                 "1\n+27718693002\nHi Mike, can you join us for dinner tonight?\n1\n");
 
-        assertTrue(output.contains("Message successfully sent"));
-        assertEquals(countBefore + 1,
+        assertTrue(output.contains("Message sent"));
+          assertEquals(countBefore + 1,
                 PROG5121_Part1.returnTotalMessages());
         assertTrue(PROG5121_Part1.printMessages()
                 .contains("Hi Mike, can you join us for dinner tonight?"));

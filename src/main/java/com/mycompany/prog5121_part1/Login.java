@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java
- */
 package com.mycompany.prog5121_part1;
 
 /**
+ * Handles user registration, username and password validation,
+ * South African cellphone number validation and login authentication.
  *
  * @author Dineo Lesabe
  */
@@ -69,8 +67,7 @@ public class Login {
                 && hasSpecial;
     }
 
-    // Regular expression used to validate a South African cell phone number.
-    // Source: ICASA (2016).
+    // Source: ICASA (2016), Numbering Plan Regulations.
     public boolean checkCellPhoneNumber() {
         return cellPhoneNumber != null
                 && cellPhoneNumber.matches("^\\+27[0-9]{9}$");

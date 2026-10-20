@@ -1,25 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt
- */
-
 package com.mycompany.prog5121_part1;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
+ * Runs the QuickChat application, including user registration,
+ * login, message handling and message storage.
  *
  * @author Dineo Lesabe
  */
 public class PROG5121_Part1 {
 
-    private static int messageCount = 0;
     private static final ArrayList<Message> sentMessages = new ArrayList<>();
 
+    /**
+     * Returns the total number of successfully sent messages.
+     *
+     * @return the number of sent messages
+     */
     public static int returnTotalMessages() {
         return sentMessages.size();
     }
 
+    /**
+     * Creates a formatted summary of all sent messages.
+     *
+     * @return the formatted message details or an empty-list message
+     */
     public static String printMessages() {
         if (sentMessages.isEmpty()) {
             return "No sent messages yet.";
@@ -45,8 +52,12 @@ public class PROG5121_Part1 {
         return output.toString().trim();
     }
 
+    /**
+     * Runs registration, login and the QuickChat messaging menu.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
         Login login = new Login();
 
@@ -144,9 +155,16 @@ public class PROG5121_Part1 {
         scanner.close();
     }
 
+    /**
+     * Allows the user to enter and process a specified number of messages.
+     * Each message can be sent, disregarded or stored for later.
+     *
+     * @param scanner the scanner used to read user input
+     * @return an empty string after processing, or an error message
+     */
     public static String SentMessage(Scanner scanner) {
-
         System.out.print("How many messages would you like to enter? ");
+
         int numberOfMessages;
 
         try {
@@ -163,17 +181,16 @@ public class PROG5121_Part1 {
         }
 
         for (int i = 0; i < numberOfMessages; i++) {
-
             System.out.println("\n=== Message " + (i + 1) + " ===");
 
             Message currentMessage = new Message();
 
+            // Validate the recipient cellphone number.
             while (true) {
                 System.out.print(
                         "Enter recipient cellphone (+27XXXXXXXXX): ");
 
-                currentMessage.setRecipient(
-                        scanner.nextLine().trim());
+                currentMessage.setRecipient(scanner.nextLine().trim());
 
                 if (currentMessage.checkRecipientCell().equals(
                         "Cell phone number successfully captured.")) {
@@ -181,9 +198,12 @@ public class PROG5121_Part1 {
                 }
 
                 System.out.println(
-                        "Cell phone number is incorrectly formatted or does not contain an international code. Please correct the number and try again.");
+                        "Cell phone number is incorrectly formatted or "
+                        + "does not contain an international code. "
+                        + "Please correct the number and try again.");
             }
 
+            // Validate the message and provide length feedback.
             while (true) {
                 System.out.print(
                         "Enter your message (maximum 250 characters): ");
@@ -192,19 +212,25 @@ public class PROG5121_Part1 {
 
                 if (currentMessage.checkMessageLength()
                         && !currentMessage.getMessage().trim().isEmpty()) {
+                    System.out.println(
+                            currentMessage.getMessageLengthFeedback());
                     break;
                 }
 
-                System.out.println(
-                        "Please enter a valid message of no more than 250 characters.");
+                if (currentMessage.getMessage() != null
+                        && currentMessage.getMessage().length() > 250) {
+                    System.out.println(
+                            currentMessage.getMessageLengthFeedback());
+                } else {
+                    System.out.println(
+                            "Please enter a valid, non-empty message.");
+                }
             }
 
-            currentMessage.setMessageNumber(messageCount);
+            currentMessage.setMessageNumber(i);
 
             String hash = currentMessage.createMessageHash();
             currentMessage.setMessageHash(hash);
-
-            messageCount++;
 
             String action;
 
@@ -231,7 +257,7 @@ public class PROG5121_Part1 {
                     currentMessage.setMessageStatus("Sent");
                     sentMessages.add(currentMessage);
 
-                    System.out.println("Message successfully sent");
+                    System.out.println("Message sent");
                     System.out.println(
                             "Message ID: " + currentMessage.getMessageID());
                     System.out.println("Message Hash: " + hash);

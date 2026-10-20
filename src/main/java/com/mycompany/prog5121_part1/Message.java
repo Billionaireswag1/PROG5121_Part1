@@ -98,12 +98,11 @@ public class Message {
         return messageHash;
     }
 
-        /**
-     * Stores messages in JSON format in the messages.json file.
-     * Uses Java file-handling functionality.
-     * Reference: Oracle (2026).
-     */
-    
+      /**
+ * Stores message data in JSON format.
+ * JSON structure: JSON.org (n.d.).
+ * Java file operations: Oracle (2026).
+ */
     public String storeMessageToJson() {
         Path path = Path.of("messages.json");
 

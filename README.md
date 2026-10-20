@@ -65,6 +65,8 @@ mvn clean test
 
 ## References
 
-Independent Communications Authority of South Africa (ICASA) (2016) *Numbering Plan Regulations*. Government Gazette No. 39861, Notice No. 370, 24 March. Available at: https://www.icasa.org.za/legislation-and-regulations/numbering-plan-regulations (Accessed: 20 October 2026).
+Independent Communications Authority of South Africa (ICASA) (2016) Numbering Plan Regulations. Government Gazette No. 39861, Notice No. 370, 24 March. Available at: https://www.icasa.org.za/legislation-and-regulations/numbering-plan-regulations (Accessed: 20 October 2026).
 
-Oracle (2026) *Java SE 26: Files Class*. Available at: https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/nio/file/Files.html (Accessed: 20 October 2026).
+JSON.org (n.d.) Introducing JSON. Available at: https://www.json.org/json-en.html (Accessed: 20 October 2026).
+
+Oracle (2026) Java SE 26: Files Class. Available at: https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/nio/file/Files.html (Accessed: 20 October 2026).

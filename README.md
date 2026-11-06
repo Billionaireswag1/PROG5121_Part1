@@ -40,6 +40,10 @@ Part 2 extends the original application by introducing a menu-driven messaging s
 - Store messages in JSON format.
 - Display the total number of sent messages.
 - Provide an option for recently sent messages.
+- Find the longest message.
+- Search for messages by message ID.
+- Search for messages by recipient cellphone number.
+- Generate a report of all processed messages.
 
 ### Testing
 

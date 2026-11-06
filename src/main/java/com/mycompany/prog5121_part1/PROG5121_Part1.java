@@ -447,7 +447,7 @@ public class PROG5121_Part1 {
                     sentMessages.add(currentMessage);
                     allMessages.add(currentMessage);
 
-                    System.out.println("Message sent");
+                    System.out.println("Message successfully sent.");
                     System.out.println(
                             "Message ID: " + currentMessage.getMessageID());
                     System.out.println("Message Hash: " + hash);
@@ -485,6 +485,7 @@ public class PROG5121_Part1 {
                     break;
             }
         }
+      System.out.println("Total messages sent: " + returnTotalMessages());
 
         return "";
     }
